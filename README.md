@@ -4,11 +4,6 @@
 
 <img src="captures/1-kafka.png">
 
-### 1. Démarrer Zookeeper
-### 2. Démarrer Kafka
-### 3. Tester avec Kafka-console-producer et kafka-console-consumer
-### 3.1 Kafka Producer
-### 3.2 Kafka Consumer
 
 # 2- Utilisation de Docker avec Kafka
 
@@ -53,6 +48,13 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beg
 ### PageEvent :
 
 <img src="captures/PageEvent.png">
+<<<<<<< HEAD
+=======
+
+### PageEventRestController :
+
+<img src="captures/PageEventRestController.png">
+>>>>>>> 7ce13a08a906c8859790030de37484fd116f1917
 
 ### PageEventRestController :
 
