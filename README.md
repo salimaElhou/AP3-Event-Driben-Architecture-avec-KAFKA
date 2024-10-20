@@ -4,11 +4,6 @@
 
 <img src="captures/1-kafka.png">
 
-### 1. Démarrer Zookeeper
-### 2. Démarrer Kafka
-### 3. Tester avec Kafka-console-producer et kafka-console-consumer
-### 3.1 Kafka Producer
-### 3.2 Kafka Consumer
 
 # 2- Utilisation de Docker avec Kafka
 
