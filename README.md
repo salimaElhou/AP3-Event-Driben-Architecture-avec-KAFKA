@@ -48,5 +48,5 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic test --from-beg
 ### PageEvent :
 
 <img src="captures/PageEvent.png">
-<img src="captures/PageEventRestController.png.png">
+<img src="captures/PageEventRestController.png">
 
