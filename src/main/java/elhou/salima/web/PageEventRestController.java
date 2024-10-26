@@ -6,6 +6,7 @@ import org.apache.kafka.streams.kstream.Windowed;
 import org.apache.kafka.streams.state.KeyValueIterator;
 import org.apache.kafka.streams.state.QueryableStoreTypes;
 import org.apache.kafka.streams.state.ReadOnlyWindowStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.binder.kafka.streams.InteractiveQueryService;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.http.MediaType;
@@ -24,23 +25,22 @@ import java.util.Random;
 @RestController
 public class PageEventRestController {
 
+    @Autowired
     private StreamBridge streamBridge;
+
+    @Autowired
     private InteractiveQueryService interactiveQueryService;
 
-    public PageEventRestController(StreamBridge streamBridge, InteractiveQueryService interactiveQueryService) {
-        this.streamBridge = streamBridge;
-        this.interactiveQueryService = interactiveQueryService;
-    }
 
     //publier dans un topic Name
     //utilisee streamBridge
-    @GetMapping("publish/{topic}/{name}")
+    @GetMapping("/publish/{topic}/{name}")
     public PageEvent publish(@PathVariable String topic, @PathVariable String name){
-        PageEvent pageEvent=new PageEvent();
-        pageEvent.setName(name);
-        pageEvent.setDate(new Date());
-        pageEvent.setDuration(new Random().nextInt(1000));
-        pageEvent.setUser(Math.random()>0.5?"U1":"U2");
+        PageEvent pageEvent=new PageEvent(name,Math.random()>0.5?"U1":"U2",new Date(),new Random().nextInt(9000));
+        //pageEvent.setName(name);
+        //pageEvent.setDate(new Date());
+        //pageEvent.setDuration(new Random().nextInt(9000));
+        //pageEvent.setUser(Math.random()>0.5?"U1":"U2");
         //envoyer le msg
         streamBridge.send(topic,pageEvent);
         return pageEvent;
