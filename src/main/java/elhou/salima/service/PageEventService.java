@@ -18,6 +18,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static java.util.Locale.filter;
+
 @Service
 public class PageEventService {
     //deployee consumer
@@ -51,6 +53,22 @@ public class PageEventService {
             input.setName("L : "+input.getName().length());
             input.setUser("UUUUUUU");
             return input;
+        };
+    }
+
+    //page P1 il a visite 50 Fois returne -> KTable
+    //cle -> String ->(name page)
+    //valeur -> Long -> (nbr de visit)
+    @Bean
+    public Function<KStream<String, PageEvent>, KStream<String, Long>> kStreamFunction() {
+        return (input) -> {
+          return  input
+                .filter((k, v) -> v.getDuration() > 100)
+                .map((k, v) -> new KeyValue<>(v.getName(), 0L))
+                .groupBy((k, v) -> k, Grouped.with(Serdes.String(), Serdes.Long()))
+                .count()
+                .toStream();
+
         };
     }
 
